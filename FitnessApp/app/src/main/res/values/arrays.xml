@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_type_options">
+        <item>@string/type_barbell</item>
+        <item>@string/type_dumbbell</item>
+        <item>@string/type_bodyweight</item>
+        <item>@string/type_machine</item>
+    </string-array>
+    <string-array name="array_bodypart_options">
+        <item>@string/bodypart_chest</item>
+        <item>@string/bodypart_quadriceps</item>
+        <item>@string/bodypart_hamstrings</item>
+        <item>@string/bodypart_calves</item>
+        <item>@string/bodypart_biceps</item>
+        <item>@string/bodypart_triceps</item>
+        <item>@string/bodypart_shoulders</item>
+        <item>@string/bodypart_back</item>
+        <item>@string/bodypart_abs</item>
+    </string-array>
+
+
+
+</resources>

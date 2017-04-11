@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">FitnessApp</string>
+    <string name="title_activity_exersice_page">ExersicePage</string>
+    <string name="title_activity_exercise_page">ExercisePage</string>
+    <string name="type_barbell">Barbell</string>
+    <string name="type_dumbbell">Dumbbell</string>
+    <string name="type_bodyweight">Body Weight</string>
+    <string name="type_machine">Machine</string>
+
+    <string name="bodypart_chest">Chest</string>
+    <string name="bodypart_quadriceps">Quadriceps</string>
+    <string name="bodypart_hamstrings">Hamstrings</string>
+    <string name="bodypart_calves">Calves</string>
+    <string name="bodypart_biceps">Biceps</string>
+    <string name="bodypart_triceps">Triceps</string>
+    <string name="bodypart_shoulders">Shoulders</string>
+    <string name="bodypart_back">Back</string>
+    <string name="bodypart_abs">Abs</string>
+
+
+
+</resources>
