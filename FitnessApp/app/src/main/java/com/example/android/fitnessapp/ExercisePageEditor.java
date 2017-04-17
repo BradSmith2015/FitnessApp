@@ -3,15 +3,18 @@ package com.example.android.fitnessapp;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.android.fitnessapp.database.ExerciseContract.ExerciseTable;
 import com.example.android.fitnessapp.database.ExerciseOpenHelper;
@@ -19,6 +22,7 @@ import com.example.android.fitnessapp.database.ExerciseOpenHelper;
 public class ExercisePageEditor extends AppCompatActivity {
     private Spinner mTypeSpinner;
     private Spinner mBodyPartSpinner;
+    private EditText mEditTextView;
     private int mtype = ExerciseTable.TYPE_BARBELL;
     private int mbodypart = ExerciseTable.BODYPART_CHEST;
 
@@ -28,6 +32,7 @@ public class ExercisePageEditor extends AppCompatActivity {
         setContentView(R.layout.activity_exercise_page_editor);
         mTypeSpinner = (Spinner) findViewById(R.id.spinner_type);
         mBodyPartSpinner = (Spinner) findViewById(R.id.spinner_bodypart);
+        mEditTextView = (EditText) findViewById(R.id.edit_name);
         setupTypeSpinner();
         setupBodyPartSpinner();
 
@@ -95,11 +100,12 @@ public void setupTypeSpinner(){
                         mbodypart = ExerciseTable.BODYPART_SHOULDERS;
                     }else if(selection.equals(getString(R.string.bodypart_back))){
                         mbodypart = ExerciseTable.BODYPART_BACK;
-                    }else{
+                    }else if(selection.equals(getString(R.string.bodypart_abs))) {
                         mbodypart = ExerciseTable.BODYPART_ABS;
                     }
-                }
+                    }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent){
                 mbodypart = ExerciseTable.BODYPART_CHEST;
@@ -108,18 +114,11 @@ public void setupTypeSpinner(){
 
 
     }
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu options from the res/menu/menu_editor.xml file.
-        // This adds menu items to the app bar.
-        getMenuInflater().inflate(R.menu.editormeni, menu);
-        return true;
-    }
 
-    public void getExerciseText(View view){
+
+    private void InsertExercise(){
         //gets the text of the edittext view and trim removes the white space
-        EditText editText = (EditText) findViewById(R.id.edit_name);
-        Editable editable = editText.getText();
-        String name = editable.toString().trim();
+        String name = mEditTextView.getText().toString().trim();
 
         ExerciseOpenHelper mDbhelper = new ExerciseOpenHelper(this);
 
@@ -133,12 +132,36 @@ public void setupTypeSpinner(){
         long newRowId = db.insert(ExerciseTable.TABLE_NAME,null,values);
 
         if(newRowId == -1 ){
-
+            Toast.makeText(this, "Error with saving Exercise", Toast.LENGTH_SHORT).show();
+        } else {
+            // Otherwise, the insertion was successful and we can display a toast with the row ID.
+            Toast.makeText(this, "Exercise saved with row id: " + newRowId, Toast.LENGTH_SHORT).show();
         }
 
-
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        //creates the menu
+        getMenuInflater().inflate(R.menu.editormeni,menu);
+        return true;
 
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.save:
+                InsertExercise();
+                finish();
+                return true;
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }
+
+
+
+
