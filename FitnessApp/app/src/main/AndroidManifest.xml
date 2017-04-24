@@ -28,6 +28,11 @@
             android:label="@string/title_activity_exercise_page"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ExercisePageEditor"></activity>
+        <provider
+            android:authorities="com.example.android.FitnessApp"
+            android:name=".database.ExerciseProvider"
+            android:exported="false"
+            />
     </application>
 
 </manifest>

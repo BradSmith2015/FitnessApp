@@ -2,6 +2,7 @@ package com.example.android.fitnessapp;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -120,23 +121,20 @@ public void setupTypeSpinner(){
         //gets the text of the edittext view and trim removes the white space
         String name = mEditTextView.getText().toString().trim();
 
-        ExerciseOpenHelper mDbhelper = new ExerciseOpenHelper(this);
-
-        SQLiteDatabase db = mDbhelper.getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put(ExerciseTable.COLUMN_EXERCISE_NAME,name);
         values.put(ExerciseTable.COLUMN_EXERCISE_TYPE,mtype);
         values.put(ExerciseTable.COLUMN_EXERCISE_BODYPART,mbodypart);
 
-        long newRowId = db.insert(ExerciseTable.TABLE_NAME,null,values);
+        Uri newUri = getContentResolver().insert(ExerciseTable.EXCONTENT_URI,values);
 
-        if(newRowId == -1 ){
+        if(newUri == null ){
             Toast.makeText(this, "Error with saving Exercise", Toast.LENGTH_SHORT).show();
         } else {
             // Otherwise, the insertion was successful and we can display a toast with the row ID.
-            Toast.makeText(this, "Exercise saved with row id: " + newRowId, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Exercise was saved", Toast.LENGTH_SHORT).show();
         }
+
 
     }
     @Override

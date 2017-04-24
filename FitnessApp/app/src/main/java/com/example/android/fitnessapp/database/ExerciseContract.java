@@ -1,6 +1,8 @@
 package com.example.android.fitnessapp.database;
 
 
+import android.graphics.Path;
+import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
@@ -8,10 +10,22 @@ import android.provider.BaseColumns;
  */
 
 public final class ExerciseContract {
-    private ExerciseContract(){}
-    public static final class ExerciseTable implements BaseColumns{
-        public final static String TABLE_NAME = "exercises";
 
+    private ExerciseContract(){}
+
+    public static final String EXCONTENT_AUTHORITY = "com.example.android.FitnessApp";
+
+    public static final Uri EXBASE_CONTENT_URI = Uri.parse("content://" + EXCONTENT_AUTHORITY);
+
+    public static final String PATH_EXERCISES = "exercises";
+
+
+    public static final class ExerciseTable implements BaseColumns{
+
+        public static final Uri EXCONTENT_URI = Uri.withAppendedPath(EXBASE_CONTENT_URI, PATH_EXERCISES);
+
+        /** Name of database table for  exercises*/
+        public final static String TABLE_NAME = "exercises";
         public final static String _ID = BaseColumns._ID;
         public final static String COLUMN_EXERCISE_NAME = "name";
         public final static String COLUMN_EXERCISE_TYPE="type";
