@@ -21,13 +21,13 @@ public class ExerciseOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String SQL_CREATE_EXERCISE_TABLE="CREATE TABLE " + ExerciseTable.TABLE_NAME + "( "
+        String SQL_CREATE_EXERCISES_TABLE="CREATE TABLE " + ExerciseTable.TABLE_NAME + "( "
                 + ExerciseTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + ExerciseTable.COLUMN_EXERCISE_NAME + " TEXT NOT NULL, "
                 + ExerciseTable.COLUMN_EXERCISE_TYPE + " INTEGER NOT NULL DEFAULT 0, "
                 + ExerciseTable.COLUMN_EXERCISE_BODYPART + " INTEGER NOT NULL DEFAULT 0);";
 
-        db.execSQL(SQL_CREATE_EXERCISE_TABLE);
+        db.execSQL(SQL_CREATE_EXERCISES_TABLE);
     }
 
     @Override

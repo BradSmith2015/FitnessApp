@@ -39,7 +39,7 @@ public class ExerciseProvider extends ContentProvider {
 
     }
 
-    ExerciseOpenHelper mDBhelper;
+    private ExerciseOpenHelper mDBhelper;
 
 
     /** Tag for the log messages */
@@ -50,7 +50,7 @@ public class ExerciseProvider extends ContentProvider {
          */
         @Override
         public boolean onCreate() {
-                ExerciseOpenHelper mDBhelper;
+            mDBhelper = new ExerciseOpenHelper(getContext());
             // Make sure the variable is a global variable, so it can be referenced from other
             // ContentProvider methods.
 
@@ -188,7 +188,18 @@ public class ExerciseProvider extends ContentProvider {
          */
         @Override
         public String getType(Uri uri) {
-            return null;
+            final int match = sUriMatcher.match(uri);
+            switch (match){
+                case EXERCISES:
+                    return ExerciseTable.CONTENT_LIST_TYPE;
+
+                case EXERCISES_ID:
+                    return ExerciseTable.CONTENT_ITEM_TYPE;
+
+                default:
+                    throw new IllegalArgumentException("Unknow Uri " + uri + " For match type " + match);
+
+            }
         }
 }
 

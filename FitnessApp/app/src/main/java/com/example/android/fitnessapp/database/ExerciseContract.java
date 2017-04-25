@@ -1,6 +1,7 @@
 package com.example.android.fitnessapp.database;
 
 
+import android.content.ContentResolver;
 import android.graphics.Path;
 import android.net.Uri;
 import android.provider.BaseColumns;
@@ -13,6 +14,7 @@ public final class ExerciseContract {
 
     private ExerciseContract(){}
 
+
     public static final String EXCONTENT_AUTHORITY = "com.example.android.FitnessApp";
 
     public static final Uri EXBASE_CONTENT_URI = Uri.parse("content://" + EXCONTENT_AUTHORITY);
@@ -21,6 +23,13 @@ public final class ExerciseContract {
 
 
     public static final class ExerciseTable implements BaseColumns{
+
+       //setting up MIME type for list
+        public static final String CONTENT_LIST_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + EXCONTENT_AUTHORITY + "/" + PATH_EXERCISES;
+        //setting up MIME type for Item
+        public  static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + EXCONTENT_AUTHORITY + "/" + PATH_EXERCISES;
 
         public static final Uri EXCONTENT_URI = Uri.withAppendedPath(EXBASE_CONTENT_URI, PATH_EXERCISES);
 
