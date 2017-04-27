@@ -89,6 +89,8 @@ public class ExerciseProvider extends ContentProvider {
                     throw new IllegalArgumentException("can not query uri" + uri);
             }
 
+            cursor.setNotificationUri(getContext().getContentResolver(), uri);
+
             return cursor;
          }
 
@@ -126,6 +128,8 @@ public class ExerciseProvider extends ContentProvider {
                 Log.e(LOG_TAG,"Failed to insert Row for" + uri);
                 return null;
             }
+            //notifys when the uri changes
+            getContext().getContentResolver().notifyChange(uri,null);
             //creates the uri for the new row
             return ContentUris.withAppendedId(uri,id);
 
