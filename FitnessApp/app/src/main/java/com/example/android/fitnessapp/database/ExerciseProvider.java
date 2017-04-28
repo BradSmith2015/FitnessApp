@@ -143,6 +143,7 @@ public class ExerciseProvider extends ContentProvider {
             final int match = sUriMatcher.match(uri);
             switch(match){
                 case EXERCISES:
+
                     return updateExercise(uri,contentValues,selection,selectionArgs);
                 case EXERCISES_ID:
                     selection = ExerciseTable._ID + "=?";
@@ -161,6 +162,7 @@ public class ExerciseProvider extends ContentProvider {
                 return 0;
             }
             SQLiteDatabase database = mDBhelper.getWritableDatabase();
+            getContext().getContentResolver().notifyChange(uri,null);
             return database.update(ExerciseTable.TABLE_NAME,values,selection,selectionArgs);
 
 
@@ -175,10 +177,12 @@ public class ExerciseProvider extends ContentProvider {
             final int match = sUriMatcher.match(uri);
             switch (match){
                 case EXERCISES:
+                    getContext().getContentResolver().notifyChange(uri,null);
                     return database.delete(ExerciseTable.TABLE_NAME,selection,selectionArgs);
                 case EXERCISES_ID:
                     selection = ExerciseTable._ID + "=?";
                     selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                    getContext().getContentResolver().notifyChange(uri,null);
                     return  database.delete(ExerciseTable.TABLE_NAME,selection,selectionArgs);
                 default:
                     throw new IllegalArgumentException("Delete not supported for " + uri);

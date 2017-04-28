@@ -1,12 +1,16 @@
 package com.example.android.fitnessapp;
 
+import android.content.ContentUris;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterViewAnimator;
 import android.widget.ListView;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -37,7 +41,19 @@ public class ExercisePage extends AppCompatActivity implements LoaderManager.Loa
         });
         ListView ExerciseList = (ListView) findViewById(R.id.ExerciseCatalog);
 
-
+        ExerciseList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //sets the intent to the editor page
+                Intent intent = new Intent(ExercisePage.this, ExercisePageEditor.class);
+                //gets the uri of the exercise that was selected
+                Uri currentExercise = ContentUris.withAppendedId(ExerciseTable.EXCONTENT_URI,id);
+                //set the Uri on the data field of the intent
+                intent.setData(currentExercise);
+                //opens the editor activity
+                startActivity(intent);
+            }
+        });
         mExerciseAdapter = new ExerciseCursorAdapter(this,null);
         ExerciseList.setAdapter(mExerciseAdapter);
         getSupportLoaderManager().initLoader(EXERCISE_LOADER, null, this);
