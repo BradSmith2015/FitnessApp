@@ -47,6 +47,7 @@ public class ExercisePageEditor extends AppCompatActivity implements LoaderManag
         setupBodyPartSpinner();
 
         Intent intent = getIntent();
+
         CurrentExercise = intent.getData();
         if(CurrentExercise != null){
             getSupportLoaderManager().initLoader(EXISTING_EX_LOADER,null,this);
