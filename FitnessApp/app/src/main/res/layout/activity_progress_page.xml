@@ -9,8 +9,9 @@
     android:paddingTop="16dp"
     tools:context="com.example.android.fitnessapp.ProgressPage">
 
-    <com.jjoe64.graphview.GraphView
+    <com.github.mikephil.charting.charts.LineChart
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/graph"/>
+        android:layout_height="400dp"
+        android:id="@+id/lineChart">
+    </com.github.mikephil.charting.charts.LineChart>
 </RelativeLayout>
