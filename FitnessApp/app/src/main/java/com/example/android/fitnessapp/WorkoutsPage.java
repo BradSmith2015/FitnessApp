@@ -53,17 +53,16 @@ public class WorkoutsPage extends AppCompatActivity {
         Intent intent = getIntent();
         if(intent != null){
             currentUriEx = intent.getData();
-            if(currentUriEx != null) {
-                ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(WorkoutsPage.this, attributes);
-                //LinearLayout ExerciseBox = new LinearLayout(this);
-                //ExerciseBox.setLayoutParams(params);
+            if(currentUriEx !=  null) {
+                LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+                View child =inflater.inflate(R.layout.workout_box_layout, (ViewGroup) findViewById(R.id.workoutbox));
 
-                //currentcursor = getContentResolver().query(currentUriEx, null, null, null, null);
-                //currentposition = currentcursor.getColumnIndex(ExerciseContract.ExerciseTable.COLUMN_EXERCISE_NAME);
-                //currentName = currentcursor.getString(currentposition);
-                //TextView name = (TextView) ExerciseBox.findViewById(R.id.workoutname);
-                //name.setText(currentName);
-                //ll.addView(ExerciseBox);
+                currentcursor = getContentResolver().query(currentUriEx, null, null, null, null);
+                currentposition = currentcursor.getColumnIndex(ExerciseContract.ExerciseTable.COLUMN_EXERCISE_NAME);
+                currentName = currentcursor.getString(currentposition);
+                TextView name = (TextView) child.findViewById(R.id.workoutname);
+                name.setText(currentName);
+                ll.addView(child);
             }
 
         }
