@@ -30,7 +30,7 @@ import org.xmlpull.v1.XmlPullParser;
 
 import static com.example.android.fitnessapp.R.layout.workout_box_layout;
 
-public class WorkoutsPage extends AppCompatActivity {
+public class WorkoutsPage extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
 
     Uri currentUriEx;
@@ -43,8 +43,6 @@ public class WorkoutsPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        XmlPullParser parser = getResources().getLayout(R.layout.workout_box_layout);
-        AttributeSet attributes = Xml.asAttributeSet(parser);
         ScrollView sv = new ScrollView(this);
         LinearLayout ll = new LinearLayout(this);
         ll.setOrientation(LinearLayout.VERTICAL);
@@ -55,13 +53,12 @@ public class WorkoutsPage extends AppCompatActivity {
             currentUriEx = intent.getData();
             if(currentUriEx !=  null) {
                 LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
-                View child =inflater.inflate(R.layout.workout_box_layout, (ViewGroup) findViewById(R.id.workoutbox));
+                String[] projection={
+                        ExerciseContract.ExerciseTable.COLUMN_EXERCISE_NAME
+                };
 
-                currentcursor = getContentResolver().query(currentUriEx, null, null, null, null);
-                currentposition = currentcursor.getColumnIndex(ExerciseContract.ExerciseTable.COLUMN_EXERCISE_NAME);
-                currentName = currentcursor.getString(currentposition);
-                TextView name = (TextView) child.findViewById(R.id.workoutname);
-                name.setText(currentName);
+                getSupportLoaderManager().initLoader(0,null,this);
+                View child =inflater.inflate(R.layout.workout_box_layout, (ViewGroup) findViewById(R.id.workoutbox));
                 ll.addView(child);
             }
 
@@ -99,4 +96,30 @@ public class WorkoutsPage extends AppCompatActivity {
     }
 
 
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        String[] projection = {
+                ExerciseContract.ExerciseTable._ID,
+                ExerciseContract.ExerciseTable.COLUMN_EXERCISE_NAME
+        };
+        return new CursorLoader(this,currentUriEx,projection,null,null,null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+       if( data.moveToFirst()) {
+           currentposition = data.getColumnIndex(ExerciseContract.ExerciseTable.COLUMN_EXERCISE_NAME);
+           currentName = data.getString(currentposition);
+           TextView name = (TextView) findViewById(R.id.workoutname);
+           name.setText(currentName);
+       }
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+
+
+    }
 }
