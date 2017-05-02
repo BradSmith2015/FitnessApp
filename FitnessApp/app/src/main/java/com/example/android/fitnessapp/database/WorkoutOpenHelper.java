@@ -1,17 +1,17 @@
-package com.example.android.fitnessapp.database;
+/*package com.example.android.fitnessapp.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.example.android.fitnessapp.database.WorkoutContract.Workoutsday;
 import com.example.android.fitnessapp.database.WorkoutContract.WorkoutExercise;
-import com.example.android.fitnessapp.database.WorkoutContract.WorkoutGroups;
+import com.example.android.fitnessapp.database.WorkoutContract.WorkoutGroups;*/
 /**
  * Created by Brad Smith on 4/30/2017.
  */
 
-public class WorkoutOpenHelper extends SQLiteOpenHelper {
-    private static final int VERSION = 1;
+//public class WorkoutOpenHelper extends SQLiteOpenHelper {
+   /* private static final int VERSION = 1;
     private static final String DATABASE_NAME = "workoutsDb.db";
 
     public WorkoutOpenHelper(Context context){
@@ -46,4 +46,4 @@ public class WorkoutOpenHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
-}
+}*/

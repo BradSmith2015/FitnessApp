@@ -82,6 +82,11 @@ public class WorkoutsPage extends AppCompatActivity {
                 onClick(findViewById(R.id.add));
 
                 return true;
+            case R.id.saveExercise:
+                WorkoutLayoutOperation.getData(this);
+                finish();
+                return true;
+
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;

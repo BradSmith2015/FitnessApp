@@ -17,6 +17,7 @@
         android:orientation="horizontal"
         android:background="@drawable/boarders">
         <EditText
+            android:inputType="number"
             android:layout_width="65dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
@@ -33,6 +34,7 @@
             android:background="@drawable/ic_cross"
             android:id = "@+id/cross"/>
         <EditText
+            android:inputType="number"
             android:layout_width="65dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"

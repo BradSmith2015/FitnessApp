@@ -4,8 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="@drawable/boarders">
+    android:background="@drawable/boarders"
+    android:id = "@+id/workoutboxRepeat">
     <EditText
+        android:inputType="number"
         android:layout_width="65dp"
         android:layout_height="50dp"
         android:hint = "Lbs"
@@ -21,6 +23,7 @@
         android:background="@drawable/ic_cross"
         android:id = "@+id/cross"/>
     <EditText
+        android:inputType="number"
         android:layout_width="65dp"
         android:layout_height="50dp"
         android:hint = "reps"

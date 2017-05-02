@@ -63,6 +63,54 @@ public class WorkoutLayoutOperation {
 
     }
 
+    public static void getData(final Activity activity){
+       LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout scrollViewLinearlayout = (LinearLayout) activity.findViewById(R.id.LinearWorkoutLayout);
+        int i =0;
+        for( int k = 0  ; k < scrollViewLinearlayout.getChildCount(); k = i  ){
+
+            LinearLayout innerLayout = (LinearLayout) scrollViewLinearlayout.getChildAt(i);
+            LinearLayout boxlayout = (LinearLayout) innerLayout.findViewById(R.id.workoutbox);
+            TextView nametextview= (TextView)  boxlayout.findViewById(R.id.workoutname);
+            EditText WeightView  = (EditText) boxlayout.findViewById(R.id.Weight);
+            EditText RepView = (EditText) boxlayout.findViewById(R.id.reps);
+            String name =nametextview.getText().toString();
+            int weight = Integer.parseInt(WeightView.getText().toString());
+            int reps = Integer.parseInt(RepView.getText().toString());
+            try {
+                while (scrollViewLinearlayout.getChildAt(i + 1).findViewById(R.id.workoutboxRepeat).isShown()) {
+                    i = i + 1;
+                    RelativeLayout minnerLayout = (RelativeLayout) scrollViewLinearlayout.getChildAt(i);
+                    RelativeLayout mrepeatlayout = (RelativeLayout) minnerLayout.findViewById(R.id.workoutboxRepeat);
+                    EditText mWeightView = (EditText) mrepeatlayout.findViewById(R.id.Weight);
+                    EditText mRepView = (EditText) mrepeatlayout.findViewById(R.id.reps);
+                    int mweight = Integer.parseInt(mWeightView.getText().toString());
+                    int mreps = Integer.parseInt(mRepView.getText().toString());
+                    if (i + 1 == scrollViewLinearlayout.getChildCount()) {
+                        break;
+                    }
+
+
+                }
+            }catch (Exception x){
+                k = i;
+
+            }
+                i = i + 1;
+
+
+
+
+
+        }
+
+
+
+
+
+
+    }
+
 
 
 

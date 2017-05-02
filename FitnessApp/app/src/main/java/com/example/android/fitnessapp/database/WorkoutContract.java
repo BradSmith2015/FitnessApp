@@ -8,7 +8,7 @@ import android.provider.BaseColumns;
  * Created by Brad Smith on 4/30/2017.
  */
 
-public class WorkoutContract {
+/*public class WorkoutContract {
 
     public static final String EXCONTENT_AUTHORITY = "com.example.android.FitnessApp";
 
@@ -37,6 +37,22 @@ public class WorkoutContract {
         //URI FOR DAY
 
 
+
+
+
+
+
+
+
+
+
+        //Setting up database for the Workouts table
+        public final static String TABLE_DAY = "workoutday";
+        public final static String _ID = BaseColumns._ID;
+        public final static String COLUMN_DAY_DATE = "date";
+    }
+    public static final class WorkoutExercise implements BaseColumns{
+
         //URI FOR WORKOUT EXERCISES
         public static final String WORKEXS_LIST_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + EXCONTENT_AUTHORITY + "/" + PATH_WORKEXS;
@@ -47,6 +63,20 @@ public class WorkoutContract {
 
         public static final Uri WORKEXSCONTENT_URI = Uri.withAppendedPath(WKBASE_CONTENT_URI, PATH_WORKEXS);
         //URI FOR WORKOUT EXERCISE
+
+
+
+
+
+
+        public final static String TABLE_WORKEXS = "workoutexercises";
+        public final static String _ID = BaseColumns._ID;
+        public final static String COLUMN_WORKEXS_NAME = "name";
+        public final static String COLUMN_WORKEXS_SETS  = "sets";
+        public final static String COLUMN_WORKEXS_WEIGHTS = "weights";
+        public final static String COLUMN_WORKEXS_REPS = "reps";
+    }
+    public final static class WorkoutGroups implements BaseColumns {
 
 
         //URI FOR GROUPING
@@ -60,28 +90,9 @@ public class WorkoutContract {
         public static final Uri GROUPCONTENT_URI = Uri.withAppendedPath(WKBASE_CONTENT_URI, PATH_GROUP);
         //URI FOR GROUPING
 
-
-
-
-
-
-        //Setting up database for the Workouts table
-        public final static String TABLE_DAY = "workoutday";
-        public final static String _ID = BaseColumns._ID;
-        public final static String COLUMN_DAY_DATE = "date";
-    }
-    public static final class WorkoutExercise implements BaseColumns{
-        public final static String TABLE_WORKEXS = "workoutexercises";
-        public final static String _ID = BaseColumns._ID;
-        public final static String COLUMN_WORKEXS_NAME = "name";
-        public final static String COLUMN_WORKEXS_SETS  = "sets";
-        public final static String COLUMN_WORKEXS_WEIGHTS = "weights";
-        public final static String COLUMN_WORKEXS_REPS = "reps";
-    }
-    public final static class WorkoutGroups {
         public final static String TABLE_GROUPS = "workoutgroups";
         public final static String _ID =BaseColumns._ID;
         public final static String COLUMN_GROUPS_DAYID = "DAY_ID";
         public final static String COLUMN_GROUPS_WORKID = "WORKEXS_ID";
     }
-}
+}*/
