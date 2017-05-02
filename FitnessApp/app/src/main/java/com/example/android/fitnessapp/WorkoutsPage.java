@@ -1,73 +1,68 @@
 package com.example.android.fitnessapp;
 
+
+
+import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.v4.app.LoaderManager;
+import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.Layout;
-import android.util.AttributeSet;
-import android.util.Xml;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 import com.example.android.fitnessapp.database.ExerciseContract;
 
-import org.xmlpull.v1.XmlPullParser;
 
-import static com.example.android.fitnessapp.R.layout.workout_box_layout;
+public class WorkoutsPage extends AppCompatActivity {
 
-public class WorkoutsPage extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+    public static final int REQUEST_CODE = 1;
+    String name;
+    Intent WorkoutData;
+    String[] projection = {
+            ExerciseContract.ExerciseTable.COLUMN_EXERCISE_NAME
+    };
+
+    @Override
+    public void onCreate(Bundle SaveInstanceState) {
+    super.onCreate(SaveInstanceState);
+    setContentView(R.layout.activity_workouts_page);
+        WorkoutLayoutOperation.dispaly(this);
 
 
-    Uri currentUriEx;
-    Cursor currentcursor;
-    int currentposition;
-    String currentName;
-;
+
+    }
+
+
+
+    //this is the request for the intent to return the data for the exercise
+    public void onClick(View view){
+        //gets intent at the Workout Exercise Page and then starts activity
+        Intent i = new Intent(this,WorkoutExercisePage.class);
+        startActivityForResult(i,REQUEST_CODE);
+    }
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ScrollView sv = new ScrollView(this);
-        LinearLayout ll = new LinearLayout(this);
-        ll.setOrientation(LinearLayout.VERTICAL);
-        sv.addView(ll);
+    protected void onActivityResult(int requestCode, int resultcode, Intent data){
+        if(resultcode == RESULT_OK && requestCode == REQUEST_CODE){
+            WorkoutData = data;
+            Uri currentExercise = WorkoutData.getData();
 
-        Intent intent = getIntent();
-        if(intent != null){
-            currentUriEx = intent.getData();
-            if(currentUriEx !=  null) {
-                LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
-                String[] projection={
-                        ExerciseContract.ExerciseTable.COLUMN_EXERCISE_NAME
-                };
-
-                getSupportLoaderManager().initLoader(0,null,this);
-                View child =inflater.inflate(R.layout.workout_box_layout, (ViewGroup) findViewById(R.id.workoutbox));
-                ll.addView(child);
+            Cursor cursor=getContentResolver().query(currentExercise,null,null,null,null);
+            if(cursor.moveToFirst()) {
+                name = cursor.getString(cursor.getColumnIndex(ExerciseContract.ExerciseTable.COLUMN_EXERCISE_NAME));
             }
-
-        }
-
-        this.setContentView(sv);
+            cursor.close();
+            WorkoutLayoutOperation.add(this,name);
 
 
         }
+
+    }
 
 
     @Override
@@ -79,12 +74,13 @@ public class WorkoutsPage extends AppCompatActivity implements LoaderManager.Loa
     }
 
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add:
-                Intent intent = new Intent(WorkoutsPage.this, WorkoutExercisePage.class);
-                startActivity(intent);
+                onClick(findViewById(R.id.add));
+
                 return true;
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
@@ -96,30 +92,12 @@ public class WorkoutsPage extends AppCompatActivity implements LoaderManager.Loa
     }
 
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        String[] projection = {
-                ExerciseContract.ExerciseTable._ID,
-                ExerciseContract.ExerciseTable.COLUMN_EXERCISE_NAME
-        };
-        return new CursorLoader(this,currentUriEx,projection,null,null,null);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-       if( data.moveToFirst()) {
-           currentposition = data.getColumnIndex(ExerciseContract.ExerciseTable.COLUMN_EXERCISE_NAME);
-           currentName = data.getString(currentposition);
-           TextView name = (TextView) findViewById(R.id.workoutname);
-           name.setText(currentName);
-       }
-
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
 
 
 
-    }
+
+
+
+
 }
+

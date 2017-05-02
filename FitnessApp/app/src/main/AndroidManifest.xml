@@ -16,13 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WorkoutsPage" />
+        <activity android:name=".WorkoutsPage"
+            android:theme = "@style/AppTheme"/>
         <activity android:name=".ProgressPage" />
         <activity android:name=".GoalsPage" />
-        <activity
-            android:name=".ExersicePage"
-            android:label="@string/title_activity_exersice_page"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ExercisePage"
             android:label="@string/title_activity_exercise_page"

@@ -36,17 +36,23 @@ public class WorkoutExercisePage extends AppCompatActivity implements LoaderMana
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //sets the intent to the editor page
-                Intent intent = new Intent(WorkoutExercisePage.this, WorkoutsPage.class);
                 //gets the uri of the exercise that was selected
                 Uri currentExercise = ContentUris.withAppendedId(ExerciseContract.ExerciseTable.EXCONTENT_URI,id);
-                //set the Uri on the data field of the intent
-                intent.setData(currentExercise);
+
                 //opens the editor activity
-                startActivity(intent);
+                finish(currentExercise);
             }
         });
 
 
+
+    }
+    //Gets the uri of the Exercise that was clicked on and sends in back to the Workouts Page
+    public void finish(Uri currentExercise){
+        Intent data = new Intent();
+        data.setData(currentExercise);
+        setResult(RESULT_OK,data);
+        super.finish();
 
     }
 
