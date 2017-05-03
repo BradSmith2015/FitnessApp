@@ -12,7 +12,9 @@ import android.provider.BaseColumns;
 
 public final class ExerciseContract {
 
-    private ExerciseContract(){}
+    private ExerciseContract(
+
+    ){}
 
 
     public static final String EXCONTENT_AUTHORITY = "com.example.android.FitnessApp";
