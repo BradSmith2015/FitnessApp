@@ -5,6 +5,8 @@ package com.example.android.fitnessapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -16,6 +18,11 @@ import android.view.View;
 
 import com.example.android.fitnessapp.database.ExerciseContract;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class WorkoutsPage extends AppCompatActivity {
 
@@ -25,12 +32,14 @@ public class WorkoutsPage extends AppCompatActivity {
     String[] projection = {
             ExerciseContract.ExerciseTable.COLUMN_EXERCISE_NAME
     };
-
+    String file = getdate();
     @Override
     public void onCreate(Bundle SaveInstanceState) {
     super.onCreate(SaveInstanceState);
     setContentView(R.layout.activity_workouts_page);
         WorkoutLayoutOperation.dispaly(this);
+       new File(this.getFilesDir(),file);
+
 
 
 
@@ -72,6 +81,19 @@ public class WorkoutsPage extends AppCompatActivity {
         return true;
 
     }
+    public String getdate(){
+        Calendar c = Calendar.getInstance();
+        int day = c.get(Calendar.DAY_OF_WEEK);
+        int month = c.get(Calendar.MONTH);
+        int year = c.get(Calendar.YEAR);
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int min = c.get(Calendar.MINUTE);
+        String date = String.format("%d/%d/%d/%d/%d",day,month,year,hour,min);
+        return date;
+
+
+
+    }
 
 
 
@@ -83,7 +105,11 @@ public class WorkoutsPage extends AppCompatActivity {
 
                 return true;
             case R.id.saveExercise:
-                WorkoutLayoutOperation.getData(this);
+                try {
+                    WorkoutLayoutOperation.getData(this,file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 finish();
                 return true;
 
