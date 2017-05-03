@@ -1,6 +1,9 @@
 package com.example.android.fitnessapp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,14 +19,27 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.ArrayList;
 
+import static android.app.PendingIntent.getActivity;
+
 public class ProgressPage extends AppCompatActivity {
+
+
+
+
+
+
+
     LineChart lineChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress_page);
-
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        int DeadliftGoal = sharedPref.getInt("DeadLift",0);
+        int BenchGoal = sharedPref.getInt("BenchPress",0);
+        int SquatGoal = sharedPref.getInt("Squat",0);
         lineChart = (LineChart) findViewById(R.id.lineChart);
 
         ArrayList<String> xAXES = new ArrayList<>();

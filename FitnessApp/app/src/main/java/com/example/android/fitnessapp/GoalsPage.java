@@ -2,6 +2,7 @@ package com.example.android.fitnessapp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +22,18 @@ public class GoalsPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goals_page);
+        EditText Dliftgoal = (EditText) findViewById(R.id.deadliftgoal);
+        EditText Benchgoal = (EditText) findViewById(R.id.benchgoal);
+        EditText Squatgoal = (EditText) findViewById(R.id.squatgoal);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        int DeadGoal = sharedPref.getInt("DeadLift",0);
+        int BenGoal = sharedPref.getInt("BenchPress",0);
+        int SqGoal = sharedPref.getInt("Squat",0);
+        if(DeadGoal != 0) {
+            Squatgoal.setText(Integer.toString(SqGoal));
+            Benchgoal.setText(Integer.toString(BenGoal));
+            Dliftgoal.setText(Integer.toString(DeadGoal));
+        }
 
 
 
@@ -31,20 +44,19 @@ public class GoalsPage extends AppCompatActivity {
 
     public void getGoals(){
 
-        EditText Deadliftgoal = (EditText) findViewById(R.id.deadliftgoal);
+        EditText Dliftgoal = (EditText) findViewById(R.id.deadliftgoal);
         EditText Benchgoal = (EditText) findViewById(R.id.benchgoal);
         EditText Squatgoal = (EditText) findViewById(R.id.squatgoal);
 
-        int deadgoal = Integer.parseInt(String.valueOf(Deadliftgoal.getText()));
+        int deadgoal = Integer.parseInt(String.valueOf(Dliftgoal.getText()));
         int Bengoal = Integer.parseInt(String.valueOf(Benchgoal.getText()));
         int Sqgoal = Integer.parseInt(String.valueOf(Squatgoal.getText()));
 
-
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("DeadLift", deadgoal);
         editor.putInt("BenchPress", Bengoal);
         editor.putInt("Squat", Sqgoal);
+        editor.putInt("DeadLift", deadgoal);
         editor.commit();
 
 
