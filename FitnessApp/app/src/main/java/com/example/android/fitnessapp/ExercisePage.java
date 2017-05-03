@@ -69,26 +69,6 @@ public class ExercisePage extends AppCompatActivity implements LoaderManager.Loa
     }
 
 
-    private void insertdefualt() {
-
-        ContentValues values = new ContentValues();
-        values.put(ExerciseTable.COLUMN_EXERCISE_NAME, "Squat");
-        values.put(ExerciseTable.COLUMN_EXERCISE_TYPE, ExerciseTable.TYPE_BARBELL);
-        values.put(ExerciseTable.COLUMN_EXERCISE_BODYPART, ExerciseTable.BODYPART_QUADRICEPS);
-        Uri uri1=getContentResolver().insert(ExerciseTable.EXCONTENT_URI, values);
-
-        ContentValues values2 = new ContentValues();
-        values2.put(ExerciseTable.COLUMN_EXERCISE_NAME, "Bench Press");
-        values2.put(ExerciseTable.COLUMN_EXERCISE_TYPE, ExerciseTable.TYPE_BARBELL);
-        values2.put(ExerciseTable.COLUMN_EXERCISE_BODYPART, ExerciseTable.BODYPART_CHEST);
-        Uri uri2=getContentResolver().insert(ExerciseTable.EXCONTENT_URI, values2);
-
-        ContentValues values1 = new ContentValues();
-        values1.put(ExerciseTable.COLUMN_EXERCISE_NAME, "Deadlift");
-        values1.put(ExerciseTable.COLUMN_EXERCISE_TYPE, ExerciseTable.TYPE_BARBELL);
-        values1.put(ExerciseTable.COLUMN_EXERCISE_BODYPART, ExerciseTable.BODYPART_HAMSTRINGS);
-        Uri uri3 = getContentResolver().insert(ExerciseTable.EXCONTENT_URI, values1);
-    }
 
 
     @Override
@@ -116,27 +96,6 @@ public class ExercisePage extends AppCompatActivity implements LoaderManager.Loa
         mExerciseAdapter.swapCursor(null);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //creates the menu
-        getMenuInflater().inflate(R.menu.exercisemenu, menu);
-        return true;
 
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.Default:
-
-                return true;
-
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
 

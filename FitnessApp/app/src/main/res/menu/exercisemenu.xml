@@ -3,6 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <item android:title="Insert Default Exercises"
-        android:id = "@+id/Default"/>
+    <item
+        android:id = "@+id/SaveGoals"
+        android:icon="@drawable/ic_done"
+        app:showAsAction="always"
+        />
 </menu>

@@ -1,13 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.android.fitnessapp.GoalsPage">
+    tools:context="com.example.android.fitnessapp.GoalsPage"
+    android:orientation="vertical">
 <TextView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id = "@+id/practice_edit"
-    />
-</android.support.constraint.ConstraintLayout>
+    android:layout_height="45dp"
+    android:text = "Set Goal for Max "
+    android:textSize="35dp"/>
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "Deadlift"
+        android:layout_weight = "1"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="164dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30sp"
+        android:text="Bench Press"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "Squat"
+        android:textSize="20dp"
+        android:layout_weight="1"/>
+
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/deadliftgoal"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint = "Lbs"
+            android:layout_weight = "1"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:inputType="number"
+            android:id="@+id/benchgoal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30sp"
+            android:layout_marginRight="30sp"
+            android:layout_weight = ".75"
+            android:hint = "Lbs"
+            android:textSize="20dp" />
+
+        <EditText
+            android:inputType="number"
+            android:id="@+id/squatgoal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Lbs"
+            android:textSize="20dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+</LinearLayout>
