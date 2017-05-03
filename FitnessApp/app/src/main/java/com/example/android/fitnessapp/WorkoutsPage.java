@@ -3,6 +3,7 @@ package com.example.android.fitnessapp;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.icu.text.DateFormat;
@@ -15,10 +16,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.android.fitnessapp.database.ExerciseContract;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
@@ -38,8 +42,6 @@ public class WorkoutsPage extends AppCompatActivity {
     super.onCreate(SaveInstanceState);
     setContentView(R.layout.activity_workouts_page);
         WorkoutLayoutOperation.dispaly(this);
-       new File(this.getFilesDir(),file);
-
 
 
 
@@ -52,6 +54,9 @@ public class WorkoutsPage extends AppCompatActivity {
         //gets intent at the Workout Exercise Page and then starts activity
         Intent i = new Intent(this,WorkoutExercisePage.class);
         startActivityForResult(i,REQUEST_CODE);
+    }
+    public void onClicks(View view){
+
     }
 
 
@@ -88,7 +93,7 @@ public class WorkoutsPage extends AppCompatActivity {
         int year = c.get(Calendar.YEAR);
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int min = c.get(Calendar.MINUTE);
-        String date = String.format("%d/%d/%d/%d/%d",day,month,year,hour,min);
+        String date = String.format("%d_%d_%d_%d_%d",day,month,year,hour,min);
         return date;
 
 
@@ -106,8 +111,20 @@ public class WorkoutsPage extends AppCompatActivity {
                 return true;
             case R.id.saveExercise:
                 try {
-                    WorkoutLayoutOperation.getData(this,file);
+                    WorkoutLayoutOperation.getData(this,file,this);
                 } catch (IOException e) {
+                    Toast.makeText(this,"fail",Toast.LENGTH_SHORT).show();
+                }
+                FileOutputStream fos;
+                try {
+                    fos=this.getApplicationContext().openFileOutput("Dates", Context.MODE_PRIVATE);
+                    fos.write(file.getBytes());
+
+                } catch (FileNotFoundException e) {
+                    Toast.makeText(this,"failed",Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    Toast.makeText(this,"failed",Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
                 finish();

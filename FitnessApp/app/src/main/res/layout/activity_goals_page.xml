@@ -5,5 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.android.fitnessapp.GoalsPage">
-
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id = "@+id/practice_edit"
+    />
 </android.support.constraint.ConstraintLayout>

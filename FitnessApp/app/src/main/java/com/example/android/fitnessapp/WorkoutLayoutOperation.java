@@ -2,6 +2,7 @@ package com.example.android.fitnessapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.text.Layout;
 import android.view.Display;
 import android.view.View;
@@ -21,8 +22,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 
+import static com.example.android.fitnessapp.R.id.WorkoutExercise;
 import static com.example.android.fitnessapp.R.id.reps;
 
 /**
@@ -73,7 +76,7 @@ public class WorkoutLayoutOperation {
 
     }
 
-    public static void writeFirstentry(String name, int weight, int reps,String file ) throws IOException {
+    public static void writeFirstentry(String name, int weight, int reps,File file ) throws IOException {
 
         FileOutputStream stream = new FileOutputStream(file);
         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(stream);
@@ -86,7 +89,7 @@ public class WorkoutLayoutOperation {
 
 
     }
-    public static void addingSets( int weight, int reps,String file ) throws IOException{
+    public static void addingSets( int weight, int reps,File file ) throws IOException{
 
         FileOutputStream stream = new FileOutputStream(file);
         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(stream);
@@ -98,7 +101,7 @@ public class WorkoutLayoutOperation {
 
 
     }
-    public static void addnext(String file) throws IOException{
+    public static void addnext(File file) throws IOException{
 
         FileOutputStream stream = new FileOutputStream(file);
         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(stream);
@@ -109,8 +112,10 @@ public class WorkoutLayoutOperation {
 
     }
 
-    public static void getData(final Activity activity, String file) throws IOException {
-       LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    public  static void getData(final Activity activity, String file, Context context) throws IOException {
+        FileOutputStream fos;
+        fos=context.getApplicationContext().openFileOutput(file,Context.MODE_PRIVATE);
+
         LinearLayout scrollViewLinearlayout = (LinearLayout) activity.findViewById(R.id.LinearWorkoutLayout);
         int i =0;
         for( int k = 0  ; k < scrollViewLinearlayout.getChildCount(); k = i  ){
@@ -121,19 +126,21 @@ public class WorkoutLayoutOperation {
             EditText WeightView  = (EditText) boxlayout.findViewById(R.id.Weight);
             EditText RepView = (EditText) boxlayout.findViewById(reps);
             String name =nametextview.getText().toString();
-            int weight = Integer.parseInt(WeightView.getText().toString());
-            int reps = Integer.parseInt(RepView.getText().toString());
-            writeFirstentry(name,weight,reps,file);
+            String weight = WeightView.getText().toString();
+            String reps = RepView.getText().toString();
+            String total = name + " " + weight +  " " + reps;
+            fos.write(total.getBytes());
             try {
                 while (scrollViewLinearlayout.getChildAt(i + 1).findViewById(R.id.workoutboxRepeat).isShown()) {
                     i = i + 1;
                     RelativeLayout minnerLayout = (RelativeLayout) scrollViewLinearlayout.getChildAt(i);
                     RelativeLayout mrepeatlayout = (RelativeLayout) minnerLayout.findViewById(R.id.workoutboxRepeat);
                     EditText mWeightView = (EditText) mrepeatlayout.findViewById(R.id.Weight);
-                    EditText mRepView = (EditText) mrepeatlayout.findViewById(reps);
-                    int mweight = Integer.parseInt(mWeightView.getText().toString());
-                    int mreps = Integer.parseInt(mRepView.getText().toString());
-                    addingSets(mweight,mreps,file);
+                    EditText mRepView = (EditText) mrepeatlayout.findViewById(R.id.reps);
+                    String mweight = mWeightView.getText().toString();
+                    String mreps = mRepView.getText().toString();
+                    String mtotal = mweight + " " + mreps;
+                    fos.write(mtotal.getBytes());
                     if (i + 1 == scrollViewLinearlayout.getChildCount()) {
                         break;
                     }
@@ -144,7 +151,8 @@ public class WorkoutLayoutOperation {
                 k = i;
 
             }
-                addnext(file);
+            String end = "\n";
+            fos.write(end.getBytes());
                 i = i + 1;
 
 
@@ -152,15 +160,9 @@ public class WorkoutLayoutOperation {
 
 
         }
+        fos.close();
 
     }
-
-
-
-
-
-
-
 
 
 
