@@ -139,7 +139,7 @@ public class WorkoutLayoutOperation {
                     EditText mRepView = (EditText) mrepeatlayout.findViewById(R.id.reps);
                     String mweight = mWeightView.getText().toString();
                     String mreps = mRepView.getText().toString();
-                    String mtotal = mweight + " " + mreps;
+                    String mtotal = " " + mweight + " " + mreps;
                     fos.write(mtotal.getBytes());
                     if (i + 1 == scrollViewLinearlayout.getChildCount()) {
                         break;

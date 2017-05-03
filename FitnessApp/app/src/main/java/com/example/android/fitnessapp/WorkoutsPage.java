@@ -23,6 +23,7 @@ import com.example.android.fitnessapp.database.ExerciseContract;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
@@ -117,16 +118,22 @@ public class WorkoutsPage extends AppCompatActivity {
                 }
                 FileOutputStream fos;
                 try {
-                    fos=this.getApplicationContext().openFileOutput("Dates", Context.MODE_PRIVATE);
-                    fos.write(file.getBytes());
+                    String path = getFilesDir().getPath();
+                    File files = new File(path + "/dates");
+                    fos = new FileOutputStream(files,true);
+                    String insert = file + "\n";
+
+                    //fos=this.getApplicationContext().openFileOutput("dates", Context.MODE_PRIVATE);
+                    fos.write(insert.getBytes());
 
                 } catch (FileNotFoundException e) {
-                    Toast.makeText(this,"failed",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,"failedddd",Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 } catch (IOException e) {
                     Toast.makeText(this,"failed",Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
+                Toast.makeText(this,"Exercise Saved",Toast.LENGTH_SHORT).show();
                 finish();
                 return true;
 
