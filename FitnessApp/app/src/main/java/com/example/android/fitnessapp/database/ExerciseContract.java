@@ -15,7 +15,7 @@ public final class ExerciseContract {
     private ExerciseContract(
 
     ){}
-
+    // setting up all the uris to be used
 
     public static final String EXCONTENT_AUTHORITY = "com.example.android.FitnessApp";
 
@@ -41,7 +41,7 @@ public final class ExerciseContract {
         public final static String COLUMN_EXERCISE_NAME = "name";
         public final static String COLUMN_EXERCISE_TYPE="type";
         public final static String COLUMN_EXERCISE_BODYPART="bodypart";
-
+        //Values for the common types and Bodyparts to be used
         public static final int TYPE_BARBELL = 0;
         public static final int TYPE_DUMBBELL = 1;
         public static final int TYPE_BODYWEIGHT = 2;

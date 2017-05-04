@@ -20,6 +20,7 @@ public class GoalsPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
+        //Use the shared prefences to store the data for the goals
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goals_page);
         EditText Dliftgoal = (EditText) findViewById(R.id.deadliftgoal);
@@ -43,6 +44,7 @@ public class GoalsPage extends AppCompatActivity {
 
 
     public void getGoals(){
+        //Gets the data form edit text views in the goals page to be stored in the shared prefrences page
 
         EditText Dliftgoal = (EditText) findViewById(R.id.deadliftgoal);
         EditText Benchgoal = (EditText) findViewById(R.id.benchgoal);

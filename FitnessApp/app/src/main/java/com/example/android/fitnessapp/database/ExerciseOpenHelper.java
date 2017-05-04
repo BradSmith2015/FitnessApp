@@ -22,7 +22,7 @@ public class ExerciseOpenHelper extends SQLiteOpenHelper {
     public ExerciseOpenHelper(Context context){
         super(context,DATABASE_NAME,null,VERSION);
     }
-
+    //Creating the Exercise table
     @Override
     public void onCreate(SQLiteDatabase db) {
         String SQL_CREATE_EXERCISES_TABLE="CREATE TABLE " + ExerciseTable.TABLE_NAME + "( "

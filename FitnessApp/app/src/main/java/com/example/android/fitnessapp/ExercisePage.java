@@ -69,7 +69,7 @@ public class ExercisePage extends AppCompatActivity implements LoaderManager.Loa
     }
 
 
-
+    //Implements the Methods for the Cursor loader
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {

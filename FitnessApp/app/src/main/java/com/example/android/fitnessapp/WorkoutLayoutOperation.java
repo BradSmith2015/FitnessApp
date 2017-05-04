@@ -34,6 +34,8 @@ import static com.example.android.fitnessapp.R.id.reps;
 
 public class WorkoutLayoutOperation {
 
+    // adds another layout into the view
+
     public static void add( final Activity activity,String name){
 
         final LinearLayout linearLayoutform = (LinearLayout) activity.findViewById(R.id.LinearWorkoutLayout);
@@ -47,6 +49,7 @@ public class WorkoutLayoutOperation {
         btnadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+                //For when another set is added
                 final RelativeLayout repeatView = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.workout_box_repeat,null);
                 repeatView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 linearLayoutform.addView(repeatView);
@@ -64,6 +67,7 @@ public class WorkoutLayoutOperation {
     }
 
     public static void dispaly(final Activity activity){
+        //Displays the layout of the workouts and exercises
         LinearLayout scrollViewLinearLayout = (LinearLayout) activity.findViewById(R.id.LinearWorkoutLayout);
         java.util.ArrayList<LinearLayout> layouts = new ArrayList<LinearLayout>();
         for(int i = 0; i < scrollViewLinearLayout.getChildCount(); i++){
@@ -76,42 +80,7 @@ public class WorkoutLayoutOperation {
 
     }
 
-    public static void writeFirstentry(String name, int weight, int reps,File file ) throws IOException {
-
-        FileOutputStream stream = new FileOutputStream(file);
-        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(stream);
-        outputStreamWriter.write(name + " " + weight + " " + reps);
-        outputStreamWriter.flush();
-        outputStreamWriter.close();
-
-
-
-
-
-    }
-    public static void addingSets( int weight, int reps,File file ) throws IOException{
-
-        FileOutputStream stream = new FileOutputStream(file);
-        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(stream);
-        outputStreamWriter.write(" " + weight + " " + reps);
-        outputStreamWriter.flush();
-        outputStreamWriter.close();
-
-
-
-
-    }
-    public static void addnext(File file) throws IOException{
-
-        FileOutputStream stream = new FileOutputStream(file);
-        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(stream);
-        outputStreamWriter.write(" \n");
-        outputStreamWriter.flush();
-        outputStreamWriter.close();
-
-
-    }
-
+    //Used to get the data from all the sets to and reps to be stored into a TXT file
     public  static void getData(final Activity activity, String file, Context context) throws IOException {
         FileOutputStream fos;
         fos=context.getApplicationContext().openFileOutput(file,Context.MODE_PRIVATE);

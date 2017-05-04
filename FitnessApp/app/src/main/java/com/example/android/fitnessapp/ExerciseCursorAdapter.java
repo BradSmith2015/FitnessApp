@@ -14,16 +14,18 @@ import android.widget.TextView;
  */
 
 public class ExerciseCursorAdapter extends CursorAdapter {
-
+    //Setting up the cursor adapter
     public ExerciseCursorAdapter(Context context, Cursor c){
         super(context,c,0);
 
     }
+    //Using the list layout for the new view
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         return LayoutInflater.from(context).inflate(R.layout.exercise_list_layout, parent, false);
 
     }
+    //Binding the cursor to the layous
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 

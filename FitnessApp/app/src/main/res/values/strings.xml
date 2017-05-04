@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FitnessApp</string>
+    <string name="app_name">Stronger</string>
     <string name="title_activity_exersice_page">ExersicePage</string>
     <string name="title_activity_exercise_page">ExercisePage</string>
     <string name="type_barbell">Barbell</string>

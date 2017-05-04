@@ -192,6 +192,7 @@ public void setupTypeSpinner(){
         return true;
 
     }
+    //Setting up what happens on menu push
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -222,7 +223,7 @@ public void setupTypeSpinner(){
        };
        return new CursorLoader(this,CurrentExercise,projection,null,null,null);
     }
-
+    //gets alll the data for updating the exercise
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if ( data== null || data.getCount() < 1){
